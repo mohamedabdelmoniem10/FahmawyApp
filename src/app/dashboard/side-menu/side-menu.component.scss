@@ -1,0 +1,39 @@
+.mat-ripple{
+    overflow:visible;
+}
+mat-sidenav-container{
+    z-index: 0;
+    height: 100%;
+
+    
+    
+    & mat-sidenav{
+        margin-top: 10px;
+        padding-top: 20px;
+        border-radius: 0 20px 0 0;
+        background-image: linear-gradient(0deg, rgba(235,62,55,0.8645833333333334) 0%, rgba(235,62,55,0.36878501400560226) 93%), url('../../../assets/side-bar-bg.jpg');
+        background-position: center;
+        background-size: cover;
+
+        & .close-btn{
+            position: absolute;
+            top: -10px;
+            width: 100%;
+
+            & a{
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+        }
+        & mat-nav-list{
+            & mat-form-field{
+                width: 90%;
+                margin: 20px auto;
+                display: block;
+                margin-bottom: -21px;
+
+            }
+        }
+    }
+}
