@@ -1,0 +1,88 @@
+.user{
+
+    &__box{
+        margin: 10% auto;
+        width: 50rem;
+        background-color: #eb3e37;
+        padding: 1rem;
+        border-radius: .7rem;
+        color: #fff;
+    }
+
+    &__exit{
+        text-align: right;
+        
+        a{
+            cursor: pointer;
+        }
+    }
+    &__info{
+        width: 70%;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+        
+        &-row{
+            display: flex;
+            justify-content: space-between;
+
+            &:not(:last-child){
+                padding: .7rem 0;
+                border-bottom: 1px solid #fff;
+            }
+            &:last-child{
+                padding-top: .7rem;
+                border: 0;
+                margin-bottom: .5rem;
+            }
+        }
+
+        &-edit{
+            &__form{
+                color: #fff;
+                width: 80%;
+                margin: 0 auto;
+                margin-bottom: 3rem;
+        
+                input{
+                    background-color: #fff;
+                    color: #eb3e37;
+                    border: 1px solid transparent;
+                    border-radius: .5rem;
+                    padding: .8rem 1.2rem;
+                    width: 100%;
+                    margin-bottom: 2rem;
+        
+                    &::placeholder{
+                        font-size: 1.3rem;
+                        font-weight: 100;
+                    }
+                }
+            }
+            &__eye-btn{
+                position: absolute;
+                top: 0;
+                right: 0;
+                outline: none;
+                color: #eb3e37;
+            }   
+        }
+    }
+    &__edit{
+
+        &-btn{
+            background-color: #fff;
+            color: #eb3e37;
+        }
+        &-btn:hover{
+            background-color: #000;
+            color: #fff;
+        }
+        &-icon{
+            font-size: 1.8rem;
+        }
+
+    }
+}
+::ng-deep.edit__submit{
+    color: #eb3e37;
+}

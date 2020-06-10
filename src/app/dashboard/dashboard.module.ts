@@ -9,6 +9,10 @@ import { UsersComponent } from './users/users.component';
 import { RouterModule } from '@angular/router';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { MaterialModule } from '../material/material.module';
+import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SingleUserComponent } from './single-user/single-user.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -20,12 +24,14 @@ import { MaterialModule } from '../material/material.module';
     CategoriesComponent, 
     ProjectsComponent, 
     UsersComponent, 
-    StatisticsComponent
+    StatisticsComponent, LoginComponent, SingleUserComponent, RegisterComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     SideMenuComponent, 

@@ -10,11 +10,17 @@ import { MaterialModule } from './material/material.module';
 import { RouterModule } from '@angular/router';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    ConfirmDeleteComponent,
+  ],
+  entryComponents: [
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +29,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardModule,
     MaterialModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

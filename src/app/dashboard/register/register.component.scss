@@ -1,0 +1,60 @@
+.registeration{
+    &__box{
+        margin: 7% auto;
+        width: 50rem;
+        background-color: #0C0C0C;
+        padding: 1rem;
+        border-radius: .7rem;
+        color: #fff;
+    }
+    &__exit{
+        text-align: right;
+        
+        a{
+            cursor: pointer;
+        }
+    }
+    &__form{
+        color: #fff;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+
+        input{
+            background-color: #171717;
+            color: #ccc;
+            border: 1px solid transparent;
+            border-radius: .5rem;
+            padding: .8rem 1.2rem;
+            width: 100%;
+            margin-bottom: 2rem;
+
+            &::placeholder{
+                font-size: 1.3rem;
+                font-weight: 100;
+            }
+        }
+        // input.invalid{
+        //     border: 1px solid red;
+            
+            // &::placeholder{
+            //     color: rgb(235, 56, 2);
+            // }
+        // }
+    }
+    &__eye-btn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        outline: none;
+    }
+    
+}
+::ng-deep.registeration__submit{
+    color: #fff;
+    background-color: #eb3e37;
+}
+
+.invalid-mesg{
+    margin-top: -2rem;
+}

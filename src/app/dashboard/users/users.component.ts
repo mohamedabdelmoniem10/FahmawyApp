@@ -3,6 +3,8 @@ import { ServService } from 'src/app/serv.service';
 import { MatTableDataSource } from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatDialog } from '@angular/material';
+import { ConfirmDeleteComponent } from 'src/app/confirm-delete/confirm-delete.component';
 
 
 
@@ -28,7 +30,7 @@ export class UsersComponent implements OnInit {
   usersData;
   selectedData = [];
 
-  displayedColumns: string[] = ['select', 'id', 'email', 'name', 'avatar', 'search'];
+  displayedColumns: string[] = ['select', 'id', 'email', 'name', 'role', 'search'];
   dataSource = new MatTableDataSource(this.usersData);
   selection = new SelectionModel(true, [])
 
@@ -40,12 +42,13 @@ export class UsersComponent implements OnInit {
 
 
 
-  constructor(private service: ServService) { }
+  constructor(private service: ServService, public dialog: MatDialog) { }
 
   getUsersFromServ() {
     this.service.getAllUsers().subscribe(res => {
       this.usersData = res;
-      this.dataSource = new MatTableDataSource(this.usersData.data);
+      console.log('this is the response from the server', res);
+      this.dataSource = new MatTableDataSource(this.usersData);
     });
   }
 
@@ -71,14 +74,67 @@ checkboxLabel(row): string {
   }
   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
 }
-i : number;
-getSelectedItem() {
+
+selectedId = [];
+selectedUserName = [];
+deleteSelectedItem() {
   console.log('this is the selected data', this.selection.selected);
-  for(this.i = 0; this.i < this.selection.selected.length; this.i++) {
-    
-    this.service.delete(this.selection.selected[this.i].id).subscribe(res => {
-      console.log(res)
-    })
+  for(let i = 0; i < this.selection.selected.length; i++) {
+    this.selectedId.push(this.selection.selected[i].id);
+    this.selectedUserName.push(this.selection.selected[i].name)
+    console.log('id:', this.selection.selected[i].id);
+
+  }
+  
+  let dialogeRef = this.dialog.open(ConfirmDeleteComponent, {data: {names: this.selectedUserName}});
+  
+  dialogeRef.afterClosed().subscribe(res => {
+    console.log('this is the res from dialog', res);
+    if(res == 'false') {
+      this.selectedUserName = [];
+      this.selectedId = [];
+      this.selection.clear()
+    }
+    else if(res == 'true') {
+      console.log('this.selectedId', this.selectedId)
+      this.service.delete(this.selectedId).subscribe(res => {
+        this.getUsersFromServ();
+        this.selection.clear()
+        this.selectedUserName = [];
+        this.selectedId = [];
+      });
+    }
+  })
+
+
+}
+
+singleUser;
+view(row) {
+  this.singleUser = row;
+
+  // this.service.getSingleUser(row.id).subscribe( res => {
+  //   console.log(res);
+  //   this.singleUser = res;
+  // });
+}
+
+
+singleUserFalse(event) {
+  console.log('this is from the single user component', event);
+  this.singleUser = false;
+}
+
+registeration;
+openRegisterForm() {
+  this.selection.clear()
+  this.registeration = true;
+}
+registerationFalse(event) {
+  this.registeration = false;
+  console.log('this is the event from register false', event)
+  if(event == "false") {
+    this.getUsersFromServ();
   }
 }
 

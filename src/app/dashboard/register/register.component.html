@@ -1,0 +1,37 @@
+<section class="registeration__box">
+
+    <div class="registeration__exit u-margin-b-small">
+        <a (click)="backFunc()" matRipple>
+            <mat-icon>clear</mat-icon>
+        </a>
+    </div>
+
+                
+    <form [formGroup]="register" class="registeration__form">
+        <div class="form-group">
+            <input formControlName="name" [class.invalid]="name.invalid" placeholder="please type your Name" required>
+            <div class="alert alert-danger invalid-mesg" *ngIf="name.touched && name.invalid">this field is required</div>
+        </div>
+        <div class="form-group">
+            <input formControlName="email" [class.invalid]="email.invalid" type="email" placeholder="please type your Email" required>
+            <div class="alert alert-danger invalid-mesg" *ngIf="email.touched && email.invalid">{{ email.errors | json }}</div>
+        </div>
+        <div class="form-group" style="position: relative;">
+            <input formControlName="password" [class.invalid]="password.invalid" [type]="hide ? 'password' : 'text'" (keyup)="confirmed()" placeholder="password here" required minlength="8">
+            <button class="registeration__eye-btn" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </button>
+            <div class="alert alert-danger invalid-mesg" *ngIf="password.touched && password.invalid && password.errors.minlength">password must be {{ password.errors.minlength.requiredLength }}.</div>
+            <div class="alert alert-danger invalid-mesg" *ngIf="password.touched && password.invalid && !password.errors.minlength">this field is required</div>
+        </div>
+        <div class="form-group">
+            <input formControlName="password_confirmation" [ngStyle]="{'margin-bottom': !removeTypicalAlert ? '0px' : '2rem'}" (keyup)="confirmed()" type="password" placeholder="confirm your password" required minlength="8">
+            <div class="alert alert-danger" *ngIf="!typical && password.touched && !removeTypicalAlert">not typical</div>
+            <div class="alert alert-success" *ngIf="typical && password.touched && !removeTypicalAlert">typical</div>
+        </div>
+        <div class="form-group" style="text-align: right;">
+            <button type="submit" class="registeration__submit" (click)="registerFunc()" mat-raised-button>Register</button>
+        </div>
+    </form>
+
+</section>

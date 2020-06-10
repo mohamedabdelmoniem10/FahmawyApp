@@ -1,0 +1,36 @@
+<section class="signing w-100 pt-5">
+    <div class="container">
+        <div class="row">
+
+            <!-- this is the login -->
+            <div class="col-md-6 col-12">
+                <div class="logo-box text-center pt-5 pb-3">
+                    <img class="w-50" src="../../../assets/fahmawylogo.png">
+                  </div>
+                <form [formGroup]="login" >
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" placeholder="please type your Email">
+                            <mat-hint>Admin please enter just email</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Enter your password</mat-label>
+                            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                            </button>
+                          </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="submit" (click)="logIn()" mat-raised-button>login</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+

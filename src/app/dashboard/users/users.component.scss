@@ -1,6 +1,17 @@
 table {    
     width: 90%;
     margin: 20px auto;
+
+    & th{
+        color: #000;
+        font-size: 1.7rem;
+        font-weight: 400;
+    }
+    & td:not(:last-child){
+        color: #777;
+        font-weight: 400;
+    }
+
 }
 
 .add-btn{
@@ -9,7 +20,41 @@ table {
     right: 20px;
 
     & button{
-        background-color: #58A847;
+        background-color: #eb3e37;
         color: #fff;
+        outline: none;
     }
+}
+
+.view{
+    cursor: pointer;
+    color: #777;
+}
+.delete-btn{
+    width: 90%;
+    margin: auto;
+    button{
+        color: #fff;
+        background-color: #000;
+        border-radius: 1rem;
+        outline: none;
+    }
+}
+::ng-deep.filter{
+    position: absolute !important;
+    top: 3rem;
+    right: 7rem;
+}
+
+
+
+.single-user, .registeration{
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: rgba( #cfcfcf, .5);
+    backdrop-filter: blur(3px);
 }

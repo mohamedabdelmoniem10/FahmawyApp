@@ -24,7 +24,6 @@ export class SideMenuComponent implements OnInit {
     })
   }
   
-
   ngOnInit() {
     this.getOpenStatus();
   }

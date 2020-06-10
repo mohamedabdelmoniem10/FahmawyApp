@@ -5,6 +5,8 @@ mat-toolbar{
     color: #eb3e37;
     box-shadow: #000 0px 0px 10px -3px;
     height: 50px;
+    display: flex;
+    justify-content: space-between;
 
     & .left-side{
         width: 15%;
@@ -28,6 +30,12 @@ mat-toolbar{
             width: 30px;
             height: 30px;
             margin-right: 7px;
+        }
+    }
+    & .right-side{
+        & button{
+            color: #eb3e37;
+
         }
     }
 }

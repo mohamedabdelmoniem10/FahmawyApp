@@ -1,38 +1,21 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" [(opened)]='opened'>
-        <mat-action-list class="close-btn" (click)="open()">
-            <a mat-list-item>
-                <mat-icon>arrow_back_ios</mat-icon>
-            </a>
-          </mat-action-list>
-        
+    <mat-sidenav class="side-menu" mode="side" [(opened)]='opened'>
+
             <mat-nav-list>
-                <div mat-list-item>
-                    <mat-form-field appearance="fill">
-                        <mat-icon matSuffix>search</mat-icon>
-                        <input matInput type="search">
-                    </mat-form-field>
+                <div class="search u-margin-b-small" mat-list-item>
+                    <span class="search__icon">
+                        <mat-icon>search</mat-icon>
+                    </span>
+                    <input type="search" autocomplete="off" class="search__input" name="search" placeholder="Type in to search .." id="search">
                 </div>
 
-                <a mat-list-item [routerLink]="['/dashboard']">
+                <a mat-list-item class="link" [routerLink]="['/dashboard']">
                     <mat-icon matListIcon>equalizer</mat-icon>
                     <h3 matLine> Statistics </h3>
                 </a>
-                <a mat-list-item [routerLink]="['/users']">
+                <a mat-list-item class="link" [routerLink]="['/users']">
                     <mat-icon matListIcon>people_alt</mat-icon>
-                    <h3 matLine> Companies </h3>
-                </a>
-                <a mat-list-item>
-                    <mat-icon matListIcon>build</mat-icon>
-                    <h3 matLine> services </h3>
-                </a>
-                <a mat-list-item>
-                    <mat-icon matListIcon>people_alt</mat-icon>
-                    <h3 matLine> Companies </h3>
-                </a>
-                <a mat-list-item>
-                    <mat-icon matListIcon>people_alt</mat-icon>
-                    <h3 matLine> Companies </h3>
+                    <h3 matLine> Users </h3>
                 </a>
               </mat-nav-list>
     </mat-sidenav>
