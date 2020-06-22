@@ -29,7 +29,9 @@ logIn() {
     if(res) {
       console.log('this is the result ', res)
       this.result = res;
+      this.localStorage.set('id', this.result.data.id);
       this.localStorage.set('token', this.result.data.api_token);
+      this.localStorage.set('role', this.result.data.role);
       this.router.navigate(['/dashboard']);
       this.service.updateLoggedIn(true);
     }

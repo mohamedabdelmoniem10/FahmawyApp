@@ -1,0 +1,80 @@
+*:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#profile,
+#profileEdit {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 0 !important;
+}
+
+.profile-content p {
+  margin: 0;
+}
+
+#profile .profile-description-title,
+#profile .profile-subscription-title,
+#profileEdit .profile-edit-title,
+#profileEdit .profilesub-edit-title {
+  background-color: #F60000;
+  padding: 15px;
+  color: white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin-bottom: 30px;
+}
+
+
+
+.form-setting button:nth-of-type(1) {
+  background-color: #F60000;
+  color: #fff;
+}
+
+.form-setting button:nth-of-type(2) {
+  background-color: #000;
+  color: #fff;
+}
+
+
+
+.profile-hidden {
+  display: none;
+
+}
+
+#profileEdit h6 {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+#profileEdit textarea {
+  resize: none;
+  border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #f2f2f2eb;
+  color: #646464;
+  font-size: 15px;
+  background-color: #f2f2f2eb;
+}
+
+label {
+  font-weight: 700;
+}
+
+form .form-group {
+  margin-bottom: 30px;
+}
+
+input {
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #f2f2f2eb;
+  color: #646464;
+  font-size: 15px;
+  background-color: #f2f2f2eb;
+  margin: 0 auto;
+  max-height: 2em
+}

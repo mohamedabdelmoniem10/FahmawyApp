@@ -9,13 +9,33 @@
                     <input type="search" autocomplete="off" class="search__input" name="search" placeholder="Type in to search .." id="search">
                 </div>
 
-                <a mat-list-item class="link" [routerLink]="['/dashboard']">
+                <a mat-list-item class="link" [routerLink]="['/dashboard']" routerLinkActive="focus">
                     <mat-icon matListIcon>equalizer</mat-icon>
                     <h3 matLine> Statistics </h3>
                 </a>
-                <a mat-list-item class="link" [routerLink]="['/users']">
+                <a mat-list-item class="link" [routerLink]="['/users']" routerLinkActive="focus">
                     <mat-icon matListIcon>people_alt</mat-icon>
                     <h3 matLine> Users </h3>
+                </a>
+                <a mat-list-item class="link" [routerLink]="['/profile']" routerLinkActive="focus">
+                    <mat-icon matListIcon>account_box</mat-icon>
+                    <h3 matLine> Profile </h3>
+                </a>
+                <a mat-list-item class="link" [routerLink]="['/categories']" routerLinkActive="focus">
+                    <mat-icon matListIcon>category</mat-icon>
+                    <h3 matLine> Categories </h3>
+                </a>
+                <a mat-list-item class="link" [routerLink]="['/services']" routerLinkActive="focus">
+                    <mat-icon matListIcon>list</mat-icon>
+                    <h3 matLine> Services </h3>
+                </a>
+                <a mat-list-item class="link" [routerLink]="['/projects']" routerLinkActive="focus">
+                    <mat-icon matListIcon>business_center</mat-icon>
+                    <h3 matLine> Projects </h3>
+                </a>
+                <a mat-list-item class="link" [routerLink]="['/teams']" routerLinkActive="focus">
+                    <mat-icon matListIcon>people_outline</mat-icon>
+                    <h3 matLine> Teams </h3>
                 </a>
               </mat-nav-list>
     </mat-sidenav>

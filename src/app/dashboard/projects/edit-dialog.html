@@ -1,0 +1,41 @@
+<form id="editForm" [formGroup]="editForm" (ngSubmit)="editProject(editForm.value)" class="container" novalidate>
+  <div class="row">
+
+    <div class="form-group mx-auto col-10">
+      <label class="w-100" for="title">Project Name: </label>
+      <input type="text" class="w-100" formControlName="title">
+      <!-- <div *ngIf=" editForm.controls.projectName.errors?.required &&
+           (editForm.controls.projectName.dirty || editForm.controls.projectName.touched)" required>
+        <span>
+          Project Name is required.
+        </span>
+      </div> -->
+    </div>
+
+
+
+    <div class="form-group mx-auto col-10">
+      <label class="w-100" for="description">Project Description: </label>
+      <textarea cols="30" rows="5" type="text" class="w-100" formControlName="description">
+  </textarea>
+      <!-- <div *ngIf=" editForm.controls.projectDesc.errors?.required &&
+       (editForm.controls.projectDesc.dirty || editForm.controls.projectDesc.touched)" required>
+        <span>
+          Project Description is required.
+        </span>
+      </div> -->
+    </div>
+
+
+    <div class=" col-12 text-center form-setting mt-5">
+
+      <button [mat-dialog-close] type="submit" [disabled]="!editForm.valid" class="btn mx-2">
+        SAVE</button>
+      <button [mat-dialog-close] class="btn mx-2 ">
+        CANCEL</button>
+    </div>
+
+
+
+  </div>
+</form>

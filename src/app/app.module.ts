@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
 
 
@@ -12,6 +12,9 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { displayDialog, editDialog } from './dashboard/projects/projects.component';
+import { serviceeditDialog, servicedisplayDialog } from './dashboard/services/services.component';
+import { CatEditDialog, CatPEditDialog } from './dashboard/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +22,15 @@ import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.componen
     DashboardComponent,
     ConfirmDeleteComponent,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [
-    ConfirmDeleteComponent
+    ConfirmDeleteComponent,
+    displayDialog, 
+    editDialog, 
+    serviceeditDialog,
+    servicedisplayDialog, 
+    CatEditDialog, 
+    CatPEditDialog
   ],
   imports: [
     BrowserModule,

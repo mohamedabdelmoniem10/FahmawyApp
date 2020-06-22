@@ -23,7 +23,7 @@ getUserData() {
 }
 
 backFunc() {
-  this.back.emit('true');
+  this.back.emit(this.userData);
 }
 
 
@@ -47,35 +47,22 @@ get new_password() {
   return this.edit.get('new_password');
 }
 
-result;
 errMsg;
-editedFields = { };
-obj = {};
-keysArr = [];
-valArr = [];
+editWindow
 editFunc() {
-  this.edit.markAllAsTouched();
-  let keyValue = Object.entries(this.edit.controls).filter(value => value[1].dirty);
-  for(let i = 0; i< keyValue.length; i++) {
-    let key = keyValue[i][0];
-    this.editedFields = {
-      [key]: this.edit.value[key],
-    };
-    this.keysArr.push(key);
-    this.valArr.push(this.edit.value[key]);
-    [key] = Object.keys(this.obj);
-    this.edit.value[key] = Object.values(this.obj);
+  // this.edit.markAllAsTouched();
+  
+
+for(let key in this.edit.value) {
+  if(!this.edit.value[key]) {
+    delete this.edit.value[key];
   }
-  this.keysArr = Object.keys(this.editedFields);
-  this.valArr = Object.values(this.editedFields);
-  console.log('this is the keys', this.keysArr);
-  console.log('this is the values', this.valArr);
-  console.log('this is the obj', this.obj)
-  console.log('this is the form data ', this.editedFields)
-  this.service.edit(this.editedFields, this.userData.id).subscribe(res => {
-    console.log('this is the result of the response', res)
+}
+this.service.edit(this.edit.value, this.userData.id).subscribe(res => {
     if(res) {
-        this.result = res;
+        this.userData = res;
+        this.edit.reset();
+        this.editWindow = false;
       }
     },
     error => {

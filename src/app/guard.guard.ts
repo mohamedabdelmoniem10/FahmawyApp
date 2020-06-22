@@ -16,8 +16,14 @@ export class GuardGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if(this.localStorage.get('token')) {
-      console.log('this is the getter of token from storage', this.localStorage.get('token'))
-      return true;
+      if(this.localStorage.get('role') == 'admin') {
+        'admin';
+      }
+      else if(this.localStorage.get('role') == 'user') {
+        'user';
+      }
+      console.log('this is the getter of role from storage', this.localStorage.get('role'))
+      
     }
     else {
       this.router.navigate(['/login'])

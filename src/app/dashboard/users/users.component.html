@@ -3,78 +3,84 @@
             <mat-label>Filter</mat-label>
             <input matInput class="filter__input" (keyup)="applyFilter($event)" placeholder="Ex. ium">
         </mat-form-field>
+<div class="mat-elevation-z8 u-margin-t-huge table">
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 u-margin-t-huge">
+  <table mat-table [dataSource]="dataSource">
+  
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+   <!-- check Column -->
+   <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()"
+                      color="primary">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                      color="primary">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+  
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> role </th>
+      <td mat-cell *matCellDef="let element">
+         {{element.role}} 
+      </td>
+    </ng-container>
+  
+    <!-- this is the search -->
+    <ng-container matColumnDef="search">
+      <th mat-header-cell *matHeaderCellDef> 
+          <!-- <mat-form-field>
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+          </mat-form-field>  -->
+          Op.
+      </th>
+      <td mat-cell *matCellDef="let element" style="text-align: right;"> 
+          <a (click)="view(element)" class="view" matRipple>
+              <mat-icon>visibility</mat-icon>
+          </a>
+      </td>
+    </ng-container>
+    
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+  </table>
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
- <!-- check Column -->
- <ng-container matColumnDef="select">
-    <th mat-header-cell *matHeaderCellDef>
-      <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()"
-                    [aria-label]="checkboxLabel()"
-                    color="primary">
-      </mat-checkbox>
-    </th>
-    <td mat-cell *matCellDef="let row">
-      <mat-checkbox (click)="$event.stopPropagation()"
-                    (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)"
-                    [aria-label]="checkboxLabel(row)"
-                    color="primary">
-      </mat-checkbox>
-    </td>
-  </ng-container>
-
-  <!-- id Column -->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> Id </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef> email </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef> role </th>
-    <td mat-cell *matCellDef="let element">
-       {{element.role}} 
-    </td>
-  </ng-container>
-
-  <!-- this is the search -->
-  <ng-container matColumnDef="search">
-    <th mat-header-cell *matHeaderCellDef> 
-        <!-- <mat-form-field>
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
-        </mat-form-field>  -->
-        Op.
-    </th>
-    <td mat-cell *matCellDef="let element" style="text-align: right;"> 
-        <a (click)="view(element)" class="view" matRipple>
-            <mat-icon>visibility</mat-icon>
-        </a>
-    </td>
-  </ng-container>
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" >
+  </mat-paginator>
+</div>
 
 <div class="delete-btn">
   <button mat-raised-button (click)="deleteSelectedItem()">

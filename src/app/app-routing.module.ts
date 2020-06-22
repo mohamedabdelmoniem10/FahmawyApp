@@ -6,6 +6,10 @@ import { StatisticsComponent } from './dashboard/statistics/statistics.component
 import { UsersComponent } from './dashboard/users/users.component';
 import { LoginComponent } from './dashboard/login/login.component';
 import { GuardGuard } from './guard.guard';
+import { TeamsComponent } from './dashboard/teams/teams.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
+import { CategoriesComponent } from './dashboard/categories/categories.component';
+import { ProjectsComponent } from './dashboard/projects/projects.component';
 
 
 const routes: Routes = [
@@ -23,8 +27,33 @@ const routes: Routes = [
       canActivate:[GuardGuard]
     },
     {
+      path: 'teams',
+      component: TeamsComponent,
+      canActivate:[GuardGuard]
+    },
+    {
       path: 'dashboard',
       component: StatisticsComponent,
+      canActivate:[GuardGuard]
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent,
+      canActivate:[GuardGuard]
+    },
+    {
+      path: 'categories',
+      component: CategoriesComponent,
+      canActivate:[GuardGuard]
+    },
+    {
+      path: 'services',
+      component: ServicesComponent,
+      canActivate:[GuardGuard]
+    },
+    {
+      path: 'projects',
+      component: ProjectsComponent,
       canActivate:[GuardGuard]
     }
   ]

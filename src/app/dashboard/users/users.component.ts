@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServService } from 'src/app/serv.service';
 import { MatTableDataSource } from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatPaginator } from '@angular/material';
 import { ConfirmDeleteComponent } from 'src/app/confirm-delete/confirm-delete.component';
-
-
+import { LocalstorageService } from 'src/app/localstorage.service';
 
 
 
@@ -33,7 +32,7 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['select', 'id', 'email', 'name', 'role', 'search'];
   dataSource = new MatTableDataSource(this.usersData);
   selection = new SelectionModel(true, [])
-
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -42,13 +41,14 @@ export class UsersComponent implements OnInit {
 
 
 
-  constructor(private service: ServService, public dialog: MatDialog) { }
+  constructor(private service: ServService, public dialog: MatDialog, private localStorage: LocalstorageService) { }
 
+  usersIds = [];
   getUsersFromServ() {
     this.service.getAllUsers().subscribe(res => {
       this.usersData = res;
-      console.log('this is the response from the server', res);
       this.dataSource = new MatTableDataSource(this.usersData);
+      this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -78,7 +78,6 @@ checkboxLabel(row): string {
 selectedId = [];
 selectedUserName = [];
 deleteSelectedItem() {
-  console.log('this is the selected data', this.selection.selected);
   for(let i = 0; i < this.selection.selected.length; i++) {
     this.selectedId.push(this.selection.selected[i].id);
     this.selectedUserName.push(this.selection.selected[i].name)
@@ -89,14 +88,12 @@ deleteSelectedItem() {
   let dialogeRef = this.dialog.open(ConfirmDeleteComponent, {data: {names: this.selectedUserName}});
   
   dialogeRef.afterClosed().subscribe(res => {
-    console.log('this is the res from dialog', res);
     if(res == 'false') {
       this.selectedUserName = [];
       this.selectedId = [];
       this.selection.clear()
     }
     else if(res == 'true') {
-      console.log('this.selectedId', this.selectedId)
       this.service.delete(this.selectedId).subscribe(res => {
         this.getUsersFromServ();
         this.selection.clear()
@@ -112,18 +109,23 @@ deleteSelectedItem() {
 singleUser;
 view(row) {
   this.singleUser = row;
-
-  // this.service.getSingleUser(row.id).subscribe( res => {
-  //   console.log(res);
-  //   this.singleUser = res;
-  // });
 }
+
 
 
 singleUserFalse(event) {
-  console.log('this is from the single user component', event);
+  
+  let data : any  = this.dataSource.filteredData;
+  console.log('data', data)
+  for(let x = 0; x < data.length; x++) {
+    if(data[x].id == event.id) {
+      this.dataSource.filteredData[x] = event;
+    }
+  }
+  this.dataSource = new MatTableDataSource(data);
   this.singleUser = false;
 }
+
 
 registeration;
 openRegisterForm() {
@@ -132,7 +134,6 @@ openRegisterForm() {
 }
 registerationFalse(event) {
   this.registeration = false;
-  console.log('this is the event from register false', event)
   if(event == "false") {
     this.getUsersFromServ();
   }

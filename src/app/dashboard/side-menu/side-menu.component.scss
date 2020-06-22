@@ -1,14 +1,17 @@
 .mat-ripple{
     overflow:visible;
 }
+::ng-deep.mat-drawer-inner-container{
+    overflow: hidden!important;
+}
 mat-sidenav-container{
     z-index: 0;
     height: 100%;
 
     .side-menu{
         width: 20rem;
+        border: none;
     }
-    
     
     & mat-sidenav{
         margin-top: 1rem;
@@ -21,7 +24,14 @@ mat-sidenav-container{
         & mat-nav-list{
             color: #fff;
             .link{
-                color: #fff!important;
+                color: #fff;
+                transition: all .3s;
+            }
+            .focus{
+                color: #eb3e37;
+                background-color: #fafafa;
+                border-radius: 5rem 0 0 1rem;
+                margin-left: 5rem;
             }
             .search{
                 position: relative;

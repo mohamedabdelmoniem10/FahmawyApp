@@ -1,0 +1,104 @@
+
+  <div class="team__box">
+    <div class="team__exit u-margin-b-small">
+          <a (click)="backFunc()" matRipple *ngIf="!editWindow && !image">
+              <mat-icon>clear</mat-icon>
+          </a>
+          <a (click)="editWindow = !editWindow" matRipple *ngIf="editWindow">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+          </a>
+      
+    </div>
+  
+
+  <div class="team__info" *ngIf="!editWindow">
+      <div class="team__info-row">
+          <span class="team__info-key">
+              id:
+          </span>
+          <span class="team__info-value">
+              {{ team.id }}
+          </span>
+      </div>
+      
+      <div class="team__info-row">
+          <span class="team__info-key">
+              Title:
+          </span>
+          <span class="team__info-value">
+              {{ team.team_title }}
+          </span>
+      </div>
+      
+      <div class="team__info-row">
+          <span class="team__info-key">
+              bio:
+          </span>
+          <span class="team__info-value">
+              {{ team.bio }}
+          </span>
+      </div>
+      
+      <div class="team__info-row">
+          <span class="team__info-key">
+              Team Image:
+          </span>
+          <span class="team__info-value">
+              <button mat-raised-button (click)="image = !image">view</button>
+          </span>
+      </div>
+      <div class="team__info-image" *ngIf="image">
+        <a (click)="image = !image" matRipple>
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </a>
+        <img [src]="team.team_photos" alt="team">
+      </div>
+      
+      <div class="team__info-row">
+          <span class="team__info-key">
+              created at:
+          </span>
+          <span class="team__info-value">
+              {{ team.created_at | date }}
+          </span>
+      </div>
+      
+      <div class="team__exit u-margin-t-small">
+          <a class="team__edit-btn" (click)="editWindow = !editWindow" mat-button>
+              <mat-icon class="team__edit-icon">edit</mat-icon>Edit
+          </a>
+      </div>
+
+
+  </div>
+
+  <div class="team__info-edit" *ngIf="editWindow">
+      <form [formGroup]="edit" class="team__info-edit__form">
+          <div class="form-group">
+              <input formControlName="name" placeholder="please type your Name">
+          </div>
+          <div class="form-group">
+              <input formControlName="email" [class.invalid]="email.invalid" type="email" placeholder="please type your Email" email>
+              <div class="alert alert-danger invalid-mesg" *ngIf="email.touched && email.invalid">{{ email.errors | json }}</div>
+          </div>
+          <div class="form-group" style="position: relative;">
+              <input formControlName="password" [class.invalid]="password.invalid" [type]="hide ? 'password' : 'text'" placeholder="password here" required minlength="8">
+              <button class="team__info-edit__eye-btn" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              </button>
+              <div class="alert alert-danger invalid-mesg" *ngIf="password.touched && password.invalid && password.errors.minlength">password must be {{ password.errors.minlength.requiredLength }}.</div>
+          </div>
+          <div class="form-group" style="position: relative;">
+              <input formControlName="new_password" [class.invalid]="new_password.invalid" [type]="hide2 ? 'password' : 'text'" placeholder="password here" minlength="8">
+              <button class="team__info-edit__eye-btn" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide2 ? 'visibility' : 'visibility_off'}}</mat-icon>
+              </button>
+              <div class="alert alert-danger invalid-mesg" *ngIf="new_password.touched && new_password.invalid && new_password.errors.minlength">password must be {{ password.errors.minlength.requiredLength }}.</div>
+          </div>
+          <div class="form-group" style="text-align: right;">
+              <button type="submit" class="edit__submit" (click)="editFunc()" mat-raised-button>Submit</button>
+          </div>
+      </form>
+  </div>
+
+</div>
