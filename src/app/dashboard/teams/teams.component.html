@@ -17,4 +17,12 @@
         </div>
     </div>
     <app-single-team [teamData]="singleTeam" (closeWindow)="closeWindow()" class="single-team" *ngIf="singleTeam"></app-single-team>
+    <app-register class="registeration" (registerWindow)="registerationFalse($event)" *ngIf="registeration"></app-register>
+
+    <div class="add-btn">
+        <button mat-raised-button (click)="openRegisterForm()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
 </div>

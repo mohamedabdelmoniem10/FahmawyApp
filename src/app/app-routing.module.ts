@@ -10,6 +10,7 @@ import { TeamsComponent } from './dashboard/teams/teams.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { CategoriesComponent } from './dashboard/categories/categories.component';
 import { ProjectsComponent } from './dashboard/projects/projects.component';
+import { ServService } from './serv.service';
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
     children: [{
       path: '',
       component: StatisticsComponent,
-      canActivate:[GuardGuard]
+      canActivate:[GuardGuard],
     },
     {
       path: 'users',

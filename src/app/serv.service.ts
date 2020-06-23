@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocalstorageService } from './localstorage.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class ServService {
 
 
-  constructor(private http: HttpClient, private localStorage: LocalstorageService) { }
+  constructor(private http: HttpClient, private localStorage: LocalstorageService, private router: Router) { }
 
 
   private sidebarOpeneSource = new BehaviorSubject(false);
@@ -27,8 +28,32 @@ export class ServService {
     this.isLoggedInSource.next(status);
   }
 
-  
+  // private isAdminSource = new BehaviorSubject(this.localStorage.get('role'));
+  // isAdmin = this.isAdminSource.asObservable();
+  // updateAdminStatus(status) {
+  //   this.isAdminSource.next(status);
+  // }
 
+// routeLink() {
+//   let param = this.router.url;
+//   let role = this.localStorage.get('role');
+  
+//   if(role == 'admin') {
+//     if(param === ('/dashboard' || '/users' || '/')) {  
+//       console.log('param1', param);    
+//       return true;
+//     }else{
+//       this.router.navigate(['/dashboard']);
+//     }
+//   }else if(role == 'user') {
+//       if(param === ('/profile' || '/categories' || '/services' || '/projects' || '/teams')) {
+//         return true;
+//       }else{
+//         console.log('param2', param);    
+//       this.router.navigate(['/profile']);
+//     }
+//   }
+// }
 
 
 

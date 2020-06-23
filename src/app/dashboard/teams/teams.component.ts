@@ -30,6 +30,17 @@ closeWindow() {
 add() {
   // here is where to add form
 }
+registeration;
+openRegisterForm() {
+  // this.selection.clear()
+  this.registeration = true;
+}
+registerationFalse(event) {
+  this.registeration = false;
+  if(event == "false") {
+    // this.getUsersFromServ();
+  }
+}
 
 
 delete(team) {

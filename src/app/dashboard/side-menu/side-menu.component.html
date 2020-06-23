@@ -9,37 +9,37 @@
                     <input type="search" autocomplete="off" class="search__input" name="search" placeholder="Type in to search .." id="search">
                 </div>
 
-                <a mat-list-item class="link" [routerLink]="['/dashboard']" routerLinkActive="focus">
+                <a mat-list-item class="link" [routerLink]="['/dashboard']" routerLinkActive="focus" *ngIf="admin == 'admin'">
                     <mat-icon matListIcon>equalizer</mat-icon>
                     <h3 matLine> Statistics </h3>
                 </a>
-                <a mat-list-item class="link" [routerLink]="['/users']" routerLinkActive="focus">
+                <a mat-list-item class="link" [routerLink]="['/users']" routerLinkActive="focus" *ngIf="admin == 'admin'">
                     <mat-icon matListIcon>people_alt</mat-icon>
                     <h3 matLine> Users </h3>
                 </a>
-                <a mat-list-item class="link" [routerLink]="['/profile']" routerLinkActive="focus">
+                <a mat-list-item class="link" [routerLink]="['/profile']" routerLinkActive="focus" *ngIf="admin == 'user'">
                     <mat-icon matListIcon>account_box</mat-icon>
                     <h3 matLine> Profile </h3>
                 </a>
-                <a mat-list-item class="link" [routerLink]="['/categories']" routerLinkActive="focus">
+                <a mat-list-item class="link" [routerLink]="['/categories']" routerLinkActive="focus" *ngIf="admin == 'user'">
                     <mat-icon matListIcon>category</mat-icon>
                     <h3 matLine> Categories </h3>
                 </a>
-                <a mat-list-item class="link" [routerLink]="['/services']" routerLinkActive="focus">
+                <a mat-list-item class="link" [routerLink]="['/services']" routerLinkActive="focus" *ngIf="admin == 'user'">
                     <mat-icon matListIcon>list</mat-icon>
                     <h3 matLine> Services </h3>
                 </a>
-                <a mat-list-item class="link" [routerLink]="['/projects']" routerLinkActive="focus">
+                <a mat-list-item class="link" [routerLink]="['/projects']" routerLinkActive="focus" *ngIf="admin == 'user'">
                     <mat-icon matListIcon>business_center</mat-icon>
                     <h3 matLine> Projects </h3>
                 </a>
-                <a mat-list-item class="link" [routerLink]="['/teams']" routerLinkActive="focus">
+                <a mat-list-item class="link" [routerLink]="['/teams']" routerLinkActive="focus" *ngIf="admin == 'user'">
                     <mat-icon matListIcon>people_outline</mat-icon>
                     <h3 matLine> Teams </h3>
                 </a>
               </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+        <router-outlet (activate)="isHere()"></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

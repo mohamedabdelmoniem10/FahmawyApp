@@ -7,15 +7,18 @@
     </div>
 
                 
-    <form [formGroup]="register" class="registeration__form">
+    <form [formGroup]="register" class="registeration__form" *ngIf="!team">
+
         <div class="form-group">
             <input formControlName="name" [class.invalid]="name.invalid" placeholder="please type your Name" required>
             <div class="alert alert-danger invalid-mesg" *ngIf="name.touched && name.invalid">this field is required</div>
         </div>
+
         <div class="form-group">
             <input formControlName="email" [class.invalid]="email.invalid" type="email" placeholder="please type your Email" required>
             <div class="alert alert-danger invalid-mesg" *ngIf="email.touched && email.invalid">{{ email.errors | json }}</div>
         </div>
+
         <div class="form-group" style="position: relative;">
             <input formControlName="password" [class.invalid]="password.invalid" [type]="hide ? 'password' : 'text'" (keyup)="confirmed()" placeholder="password here" required minlength="8">
             <button class="registeration__eye-btn" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
@@ -24,14 +27,57 @@
             <div class="alert alert-danger invalid-mesg" *ngIf="password.touched && password.invalid && password.errors.minlength">password must be {{ password.errors.minlength.requiredLength }}.</div>
             <div class="alert alert-danger invalid-mesg" *ngIf="password.touched && password.invalid && !password.errors.minlength">this field is required</div>
         </div>
+
         <div class="form-group">
             <input formControlName="password_confirmation" [ngStyle]="{'margin-bottom': !removeTypicalAlert ? '0px' : '2rem'}" (keyup)="confirmed()" type="password" placeholder="confirm your password" required minlength="8">
             <div class="alert alert-danger" *ngIf="!typical && password.touched && !removeTypicalAlert">not typical</div>
             <div class="alert alert-success" *ngIf="typical && password.touched && !removeTypicalAlert">typical</div>
         </div>
+
         <div class="form-group" style="text-align: right;">
             <button type="submit" class="registeration__submit" (click)="registerFunc()" mat-raised-button>Register</button>
         </div>
     </form>
+    
+
+    <form [formGroup]="registerTeam" class="registeration__form" *ngIf="team">
+
+        <div class="form-group">
+            <input formControlName="team_title" placeholder="please type team title" required>
+            <!-- <div class="alert alert-danger invalid-mesg" *ngIf="team_title.touched && team_title.invalid">this field is required</div> -->
+        </div>
+
+        <div class="form-group">
+            <input formControlName="bio" type="text" placeholder="please type team bio" required>
+            <!-- <div class="alert alert-danger invalid-mesg" *ngIf="bio.touched && bio.invalid">this field is required</div> -->
+        </div>
+
+
+        <div class="form-group">
+            <input formControlName="photo" (change)="uploadImgFunc($event)" type="file" placeholder="please photo for this team" required>
+            <!-- <div class="alert alert-danger invalid-mesg" *ngIf="photo.touched && photo.invalid">this field is required</div> -->
+        </div>
+
+        
+        <div class="form-group" >
+            <input #newMemberField formControlName="team_memebers" type="text" placeholder="please type team member" required>
+            <a mat-button class="add-field" (click)="addMemberField()">
+                <mat-icon>add</mat-icon>
+            </a>
+        </div>
+
+
+        <div class="form-group" >
+            <input #newSkillField formControlName="team_skills" type="text" placeholder="please type team bio" required>
+            <a mat-button class="add-field" (click)="addSkillField()">
+                <mat-icon>add</mat-icon>
+            </a>
+        </div>
+
+        <div class="form-group" style="text-align: right;">
+            <button type="submit" class="registeration__submit" (click)="registerTeamFunc()" mat-raised-button>Add</button>
+        </div>
+    </form>
+
 
 </section>

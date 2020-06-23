@@ -16,3 +16,14 @@
     background-color: rgba( #cfcfcf, .5);
     backdrop-filter: blur(3px);
 }
+.add-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    & button{
+        background-color: #eb3e37;
+        color: #fff;
+        outline: none;
+    }
+}

@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private service: ServService, private localStorage: LocalstorageService, private router: Router) { }
 
-
+  
 
   loggedIn
   getLoggingStatus() {

@@ -15,6 +15,16 @@ export class TeamService {
 getTeams() {  
   return this.http.get(`${environment.apiUrl}/api/teams_info/${this.localStorage.get('id')}`)
 }
+
+AddTeam(fd) {
+  return this.http.post(`${environment.apiUrl}/api/teams/${this.localStorage.get('id')}`, fd, {headers: new HttpHeaders({
+    'Authorization': `Bearer ${this.localStorage.get('token')}`,
+    'Content-Type': 'application/json',
+  })})
+}
+
+
+
 edit(param, team) {
   return this.http.put(`${environment.apiUrl}/api/teams/${team.company}/${team.id}`, param,  {headers: new HttpHeaders({
     'Authorization': `Bearer ${this.localStorage.get('token')}`,
