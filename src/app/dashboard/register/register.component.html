@@ -58,21 +58,23 @@
             <!-- <div class="alert alert-danger invalid-mesg" *ngIf="photo.touched && photo.invalid">this field is required</div> -->
         </div>
 
-        
-        <div class="form-group" >
-            <input #newMemberField formControlName="team_memebers" type="text" placeholder="please type team member" required>
-            <a mat-button class="add-field" (click)="addMemberField()">
-                <mat-icon>add</mat-icon>
-            </a>
+        <div formArrayName="team_memebers" *ngFor="let member of registerTeam.get('team_memebers').controls; let i = index;">
+            <div class="form-group" [formGroupName]="i">
+                <input formControlName="member_name" type="text" placeholder="please type team member" required>
+            </div>
         </div>
+        <a mat-button class="add-field" (click)="addMemberField()">
+            <mat-icon>add</mat-icon>
+        </a>
 
-
-        <div class="form-group" >
-            <input #newSkillField formControlName="team_skills" type="text" placeholder="please type team bio" required>
-            <a mat-button class="add-field" (click)="addSkillField()">
-                <mat-icon>add</mat-icon>
-            </a>
+        <div formArrayName="team_skills" *ngFor="let member of teamSkills.controls; let i = index;">
+            <div class="form-group" [formGroupName]="i">
+                <input formControlName="skill_name" type="text" placeholder="please type team bio" required>
+            </div>
         </div>
+        <a mat-button class="add-field" (click)="addSkillField()">
+            <mat-icon>add</mat-icon>
+        </a>
 
         <div class="form-group" style="text-align: right;">
             <button type="submit" class="registeration__submit" (click)="registerTeamFunc()" mat-raised-button>Add</button>

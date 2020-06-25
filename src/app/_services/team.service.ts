@@ -19,7 +19,7 @@ getTeams() {
 AddTeam(fd) {
   return this.http.post(`${environment.apiUrl}/api/teams/${this.localStorage.get('id')}`, fd, {headers: new HttpHeaders({
     'Authorization': `Bearer ${this.localStorage.get('token')}`,
-    'Content-Type': 'application/json',
+    'Accept': 'application/json',
   })})
 }
 
@@ -28,7 +28,7 @@ AddTeam(fd) {
 edit(param, team) {
   return this.http.put(`${environment.apiUrl}/api/teams/${team.company}/${team.id}`, param,  {headers: new HttpHeaders({
     'Authorization': `Bearer ${this.localStorage.get('token')}`,
-    'Content-Type': 'application/json',
+    'Accept': 'application/json',
   })});
 }
 deleteTeam(team){

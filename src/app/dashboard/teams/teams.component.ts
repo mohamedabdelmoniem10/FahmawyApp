@@ -22,6 +22,7 @@ teamsFunc() {
 singleTeam;
 view(team) {
   this.singleTeam = team;
+  console.log('this is the team ', team);
 }
 closeWindow() {
   this.singleTeam = false;
@@ -32,13 +33,12 @@ add() {
 }
 registeration;
 openRegisterForm() {
-  // this.selection.clear()
   this.registeration = true;
 }
 registerationFalse(event) {
   this.registeration = false;
   if(event == "false") {
-    // this.getUsersFromServ();
+    this.teamsFunc();
   }
 }
 

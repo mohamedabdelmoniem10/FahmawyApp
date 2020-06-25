@@ -12,6 +12,7 @@ export class CompanyinfoService {
   constructor(private _httpClient: HttpClient, private localStorage: LocalstorageService) { }
 
   getCompanyInfo(): Observable<any> {
+    // console.log('this the id from local storage', this.localStorage.get('id'))
     return this._httpClient.get(`${environment.apiUrl}/api/company_infs/${this.localStorage.get('id')}`);
 
   }

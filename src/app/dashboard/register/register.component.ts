@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, Renderer } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ServService } from 'src/app/serv.service';
 import { Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/localstorage.service';
@@ -10,7 +10,7 @@ import { TeamService } from 'src/app/_services/team.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit, AfterViewInit{
+export class RegisterComponent implements OnInit{
 
 
   
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit, AfterViewInit{
     private router: Router, 
     private localStorage: LocalstorageService, 
     private teamService: TeamService,
-    private render: Renderer
+    private renderer: Renderer2
   ) { }
 
 
@@ -95,31 +95,15 @@ export class RegisterComponent implements OnInit, AfterViewInit{
 
 
 
-  
-  // this for add team 
-
-  @ViewChild('newMemberField', {static: false}) memberFieldRef: ElementRef;
-  @ViewChild('newSkillField', {static: false}) skillFieldRef: ElementRef;
-
-
-  newMemberField;
-  countMember = 1;
-  teamMembersArr = [];
-
-  
-  addMemberField() {
-    console.log('this is the team members arr', this.registerTeam);
-    // this.registerTeam.value.team_members.push()
+  createTeamMember() {
+    return this.fb.group({
+      member_name: ['', Validators.required],
+    });
   }
-  ngAfterViewInit() {
-    this.addMemberField();  
-  }
-  
-  newSkillField;
-  countSkill = 1;
-  teamSkillsArr = [];
-  addSkillField() {
-    this.newMemberField = `<input formControlName="team_skills${this.countSkill++}" [class.invalid]="bio.invalid" placeholder="please type team member ${this.countSkill++}" required>`
+  createTeamSkill() {
+    return this.fb.group({
+      skill_name: ['', Validators.required],
+    });
   }
   
   
@@ -128,8 +112,8 @@ export class RegisterComponent implements OnInit, AfterViewInit{
     team_title: ['', Validators.required],
     bio: ['', Validators.required],
     photo: ['', Validators.required],
-    team_memebers: [[], Validators.required],
-    team_skills: [[], Validators.required]
+    team_memebers: this.fb.array([this.createTeamMember()]),
+    team_skills: this.fb.array([this.createTeamSkill()])
   })
 
   get teamTitle(){
@@ -139,15 +123,28 @@ export class RegisterComponent implements OnInit, AfterViewInit{
     return this.registerTeam.get('bio');
   }
   get teamMembers(){
-    return this.registerTeam.get('team_memebers');
+    return this.registerTeam.get('team_memebers') as FormArray;
   }
   get teamSkills(){
-    return this.registerTeam.get('team_skills');
+    return this.registerTeam.get('team_skills') as FormArray;
   }
   image;
   uploadImgFunc(e) {
     this.image =  e.target.files[0];
   }
+
+  // this for add team 
+
+  addMemberField() {
+    this.teamMembers.push(this.createTeamMember());
+  }
+  
+  
+  
+  addSkillField() {
+    this.teamSkills.push(this.createTeamSkill());
+  }
+  
 
 
   registerTeamFunc() {
@@ -157,9 +154,12 @@ export class RegisterComponent implements OnInit, AfterViewInit{
     fd.append('team_members', this.teamMembers.value);
     fd.append('team_skills', this.teamSkills.value);
     fd.append('photo', this.image);
+    fd.append('company', this.localStorage.get('id'));
+    console.log('this is the value of the form pinding', fd);
     this.teamService.AddTeam(fd).subscribe(res => {
       console.log('this is the response from adding team ', res)
-    })
+      this.registerWindow.emit('false');
+    });
   }
 
 
@@ -176,3 +176,15 @@ export class RegisterComponent implements OnInit, AfterViewInit{
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

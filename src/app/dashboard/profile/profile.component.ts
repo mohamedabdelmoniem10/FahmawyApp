@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   loadCompanyInfo() {
     return this._CompanyinfoService.getCompanyInfo().subscribe(info => {
       this.currentCompanyInfo = info[0];
-      console.log(this.currentCompanyInfo);
+      console.log('this is the company info', this.currentCompanyInfo);
     });
 
   }
